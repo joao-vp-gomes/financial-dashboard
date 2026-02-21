@@ -7,11 +7,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from models import FileInfo, Summary, Transaction
 from typing import List
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
+    allow_credentials=True,
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],

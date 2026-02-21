@@ -12,14 +12,23 @@ Full-stack application for managing and visualizing personal finances.
 - Automated financial categorization
 
 ## Setup
-### Backend
-1. cd backend
-2. python -m venv venv
-3. .\venv\Scripts\activate
-4. pip install -r requirements.txt
-5. uvicorn main:app --reload
 
 ### Frontend
 1. cd frontend
 2. npm install
 3. npm run dev
+
+### Backend
+
+#### Prerequisites
+* Python 3.10+
+* Virtual Environment (venv)
+
+1. cd backend
+2. python -m venv venv
+3. - Windows:
+     .\venv\Scripts\activate
+   - Linux/macOS:
+     source venv/bin/activate
+4. pip install -r requirements.txt (Required only for the first setup or when requirements change)
+5. python -m uvicorn main:app --reload
