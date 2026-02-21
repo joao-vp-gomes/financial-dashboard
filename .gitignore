@@ -1,0 +1,29 @@
+# --- Frontend (React/Vite) ---
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+
+# --- Backend (Python) ---
+backend/venv/
+backend/__pycache__/
+backend/*.py[cod]
+backend/*.so
+backend/.env
+backend/data/*.csv
+backend/data/*.json
+!backend/data/.gitkeep
+
+# --- Logs & Debug ---
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# --- Editor & OS ---
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.sw?
