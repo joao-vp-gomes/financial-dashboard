@@ -34,7 +34,7 @@ const Header: React.FC<Props> = ({ filters, setFilters, clearFilters, files, sel
     const activeCurrencies = filters.currency || [];
     const areAllSelected = activeCurrencies.length === availableCurrencies.length;
     
-    const hasActiveFilters = filters.startDate || filters.endDate || filters.type || !areAllSelected;
+    const hasActiveFilters = filters.startDate || filters.endDate || filters.type || activeCurrencies.length;
 
     const filterComponents = (
         <>
@@ -80,11 +80,11 @@ const Header: React.FC<Props> = ({ filters, setFilters, clearFilters, files, sel
                 </select>
             </div>
 
-            {hasActiveFilters && (
+            {hasActiveFilters ? (
                 <button className={styles.clearBtn} onClick={clearFilters}>
                     {FT.CLEAR_FILTERS.ENGLISH}
                 </button>
-            )}
+            ) : null}
         </>
     );
 

@@ -40,7 +40,7 @@ const Monitor: React.FC<Props> = ({ data, externalFilters, loading }) => {
                 <Summary data={filteredData} loading={loading} />
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '30px'}}>
                     <TimelineChart data={filteredData} loading={loading} />
-                    <CategoryChart data={filteredData} isLoading={loading} />
+                    <CategoryChart data={filteredData} loading={loading} />
                 </div>
             </div>
         </MonitorProvider>
