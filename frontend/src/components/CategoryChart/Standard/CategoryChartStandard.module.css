@@ -1,0 +1,23 @@
+/* frontend/src/components/CategoryChart/Standard/CategoryChartStandard.module.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    background: #1a202c;
+    border-radius: 12px;
+    padding: 50px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.legendLabel {
+    color: #cbd5e0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-left: 8px;
+    transition: color 0.2s;
+}

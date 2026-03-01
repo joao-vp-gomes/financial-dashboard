@@ -1,11 +1,15 @@
 # backend/models.py
 
+# Centralizes all interfaces.
+# If it gets too big, I`ll make a file for each interface.
+
 from pydantic import BaseModel
 from datetime import date
 
 class FileInfo(BaseModel):
     name: str
     transactions_count: int
+    
 class Transaction(BaseModel):
     id: str
     date: date

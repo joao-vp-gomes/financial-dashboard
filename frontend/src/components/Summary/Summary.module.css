@@ -1,0 +1,47 @@
+/* frontend/src/components/Summary/Summary.module.css */
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} 
+
+.summary {
+
+    padding: 30px;
+    border-radius: 16px;
+    width: 500px;
+    height: 830px;
+    overflow: scroll;
+
+    background: #1a202c;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    
+}
+
+.dateDivider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 5px 5px 5px;
+    width: 100%;
+}
+
+.dateDivider span {
+    font-size: 11px;
+    font-weight: 700;
+    color: #718096; 
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
+
+.line {
+    height: 1px;
+    flex-grow: 1;
+    background-color: rgba(113, 128, 150, 0.2); 
+}

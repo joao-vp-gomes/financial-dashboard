@@ -1,35 +1,105 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// frontend/src/App.tsx
+
+
+import { useState, useEffect, useMemo } from 'react';
+
+import Monitor from './components/Monitor/Monitor.tsx';
+import Header from './components/Header/Header.tsx';
+
+import type { FileInfo, Transaction, Filter } from './types';
+import { transactionService } from './services/transactionService.tsx';
+import { FT } from './services/ft.tsx';
+
+import './index.css';
+
+
+const initialFilters: Filter = {
+    startDate: null,
+    endDate: null,
+    currency: [],
+    type: null,
+};
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const [files, setFiles] = useState<FileInfo[]>([]);
+    const [selectedFile, setSelectedFile] = useState<string>('');
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
+    const [filters, setFilters] = useState<Filter>(initialFilters);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+
+        const loadInitialData = async () => {
+            try { setFiles(await transactionService.getFiles()) } 
+            catch(e){}
+        };
+        loadInitialData();
+
+    }, []);
+
+    const handleFileSelection = async (filename: string) => {
+
+        if (!filename) return;
+
+        setSelectedFile(filename);
+        setIsLoading(true);
+        setTransactions([]); 
+
+        try { setTransactions(await transactionService.getTransactionsByFile(filename)) }
+        catch (e) { setTransactions([]) }
+        finally { setIsLoading(false) }
+
+    };
+
+    const updateFilter = (key: string, value: any) => {
+
+        if (key === 'currency') {
+            setFilters(f => {
+                const current = f.currency;
+                const next = current.includes(value) ? current.filter(c => c !== value) : [...current, value];
+                return { ...f, currency: next };
+            });
+        } else setFilters(prev => ({ ...prev, [key]: value || null }));
+        
+    };
+
+    const clearFilters = () => setFilters(initialFilters);
+
+    const currencies = useMemo(() => {
+        const uniqueCurrencies = Array.from(new Set(transactions.map(t => t.currency)));
+        return uniqueCurrencies.sort();
+    }, [transactions]);
+
+    const monitorKey = `${selectedFile}-${JSON.stringify(filters)}`;
+
+    const headerParameters = {
+        filters: filters,
+        setFilters: updateFilter,
+        clearFilters: clearFilters,
+        files: files,
+        selectedFile: selectedFile,
+        onFileChange: handleFileSelection,
+        availableCurrencies: currencies,
+    }
+    const monitorParameters = {
+        key: monitorKey,
+        externalFilters: { ...filters, selectedFile }, 
+        data: transactions, 
+        loading: isLoading 
+    }
+
+    return (
+        <>  
+            <Header { ...headerParameters } />
+            { (!selectedFile && !isLoading) ? 
+            ( <div className='message'>{FT.SELECT_FILE_INITIAL_MESSAGE.ENGLISH}</div> ) : 
+            ( <Monitor { ...monitorParameters }/> ) }
+        </>
+    );
+
 }
 
-export default App
+
+export default App;

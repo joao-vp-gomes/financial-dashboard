@@ -1,0 +1,110 @@
+/* frontend/src/components/TimelineChart/Standard/TimelineChartStandard.module.css */
+
+
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h3 {
+    color: #edf2f7;
+    margin: 0;
+    font-size: 17px;
+}
+
+.badge {
+    background: #2d3748;
+    color: #a0aec0;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.chartContainer {
+    width: 100%;
+}
+
+.sliderContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 10px;
+}
+
+.sliderLabel {
+    display: flex;
+    justify-content: space-between;
+    color: #718096;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.slider {
+    width: 100%;
+    height: 6px;
+    background: #2d3748;
+    border-radius: 5px;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #4a5568;
+    border: 2px solid #cbd5e0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background: #edf2f7;
+    transform: scale(1.1);
+} 
+
+.chartHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.chartTitle {
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.selectGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.selectGroup label {
+    font-size: 9px;
+    color: #718096;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.selectGroup select {
+    background: #2d3748;
+    border: 1px solid #4a5568;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    outline: none;
+}

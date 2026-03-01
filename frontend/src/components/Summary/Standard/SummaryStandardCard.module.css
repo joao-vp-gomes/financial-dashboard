@@ -1,0 +1,76 @@
+/* frontend/src/components/Summary/Standard/SummaryStandardCard.module.css */
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.card { 
+  padding: 15px;
+
+  width: 100%;
+  max-width: 500px;
+  height: 80px; 
+
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  transition: all 0.2s;
+}
+
+.selected {
+  transform: scale(0.98); 
+}
+
+.label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  margin-top: 5px;
+}
+
+.amount {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+.income {
+  color: whitesmoke;
+  background-color: #31b358;
+  border-color: #31b358;
+}
+
+.expense {
+  color: whitesmoke;
+  background-color: #b42f2f;
+  border-color: #b42f2f;
+}
+
+.icon {
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+}
+
+.card.active.income {
+  color: #31b358;
+}
+
+.card.active.expense {
+  color: #b42f2f;
+}
+
+.active {
+  transform: scale(0.98);
+  background-color: whitesmoke;
+}

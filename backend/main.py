@@ -1,16 +1,17 @@
 # backend/main.py
-from typing import Optional
-from fastapi import FastAPI, HTTPException, Query, Response
-import pandas 
-from constants import ERROR
-from fastapi.middleware.cors import CORSMiddleware
-from models import FileInfo, Summary, Transaction
-from typing import List
+
+import asyncio
 import os
+
+from fastapi import FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
+import pandas 
+from typing import List, Optional
+
+from constants import ERROR
+from models import FileInfo, Summary, Transaction
 
 app = FastAPI()
-
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
@@ -19,12 +20,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get('/favicon.ico', include_in_schema=False)
-async def favicon():
-    return Response(status_code=204)
+async def simulate_delay():
+    await asyncio.sleep(0)
 
-
-def validate_and_load_csv(path: str):
+def _validate_and_load_csv(path: str):
 
     # Extension validation (415)
     if not path.lower().endswith('.csv'):
@@ -38,7 +37,7 @@ def validate_and_load_csv(path: str):
         df = pandas.read_csv(path)
 
         # Structure validation (422)
-        required_columns = {'id', 'date', 'description', 'amount', 'category', 'source'}
+        required_columns = {'id', 'date', 'description', 'category', 'source', 'amount', 'currency'}
         missing = required_columns - set(df.columns)
         if missing:
             raise HTTPException(
@@ -71,7 +70,7 @@ def validate_and_load_csv(path: str):
     
 
 @app.get("/transactions/{filename}", response_model=List[Transaction])
-def get_transactions(
+async def get_transactions(
     filename: str, 
     response: Response,
     start_date: Optional[str] = None,
@@ -82,10 +81,11 @@ def get_transactions(
     max_amount: Optional[int] = None,
     currencies: Optional[List[str]] = Query(None),
 ):
+    await simulate_delay()
     path = os.path.join("data", filename)
     
     try:
-        df = validate_and_load_csv(path)
+        df = _validate_and_load_csv(path)
         
         # Empty file validation (204)
         if df.empty:
@@ -112,7 +112,7 @@ def get_transactions(
     except Exception: raise HTTPException(status_code=500, detail=ERROR.INTERNAL_PROCESS)
 
 @app.get("/summary/{filename}", response_model=List[Summary])
-def get_summary(
+async def get_summary(
     filename: str, 
     response: Response,
     start_date: Optional[str] = None,
@@ -121,11 +121,11 @@ def get_summary(
     source: Optional[str] = None,
     currencies: Optional[List[str]] = Query(None)
 ):
-
+    await simulate_delay()
     path = os.path.join("data", filename)
 
     try:
-        df = validate_and_load_csv(path)
+        df = _validate_and_load_csv(path)
         
         # Empty file validation (204)
         if df.empty:
@@ -160,7 +160,8 @@ def get_summary(
     except Exception: raise HTTPException(status_code=500, detail=ERROR.INTERNAL_PROCESS)
 
 @app.get("/files", response_model=List[FileInfo])
-def list_files():
+async def get_files():
+    await simulate_delay()
     try:
         data_path = "data"
 

@@ -1,0 +1,157 @@
+/* frontend/src/components/Header/Header.module.css */
+
+
+.header {
+    width: 100%;
+    height: 70px;
+    background: #1a202c;
+    border-bottom: 1px solid #2d3748;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: default;
+    margin-right: 20px;
+}
+
+.filters {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.filterGroup label {
+    font-size: 10px;
+    color: #718096;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.filterGroup input, .filterGroup select {
+    background: #2d3748;
+    border: 1px solid #4a5568;
+    color: #fff;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 13px;
+    outline: none;
+}
+
+.clearBtn {
+    margin-top: 12px;
+    background: transparent;
+    border: 1px solid #e53e3e;
+    color: #e53e3e;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s;
+}
+
+.clearBtn:hover {
+    background: #e53e3e;
+    color: white;
+}
+
+.currencyPills {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    max-width: 200px; 
+}
+
+.pill {
+    background: #2d3748;
+    border: 1px solid #4a5568;
+    color: #a0aec0;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.activePill {
+    background: #4299e1; 
+    border-color: #63b3ed;
+    color: white;
+}
+
+.pill:hover {
+    border-color: #a0aec0;
+}
+
+.customDropdown {
+    position: relative;
+    min-width: 140px;
+}
+
+.dropdownTrigger {
+    width: 100%;
+    background: #2d3748;
+    border: 1px solid #4a5568;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow {
+    font-size: 8px;
+    margin-left: 8px;
+    color: #718096;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    background: #2d3748;
+    border: 1px solid #4a5568;
+    border-radius: 4px;
+    z-index: 1000;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.dropdownItem {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 10px;
+    transition: background 0.2s;
+}
+
+.dropdownItem:hover {
+    background: #4a5568;
+}
+
+.dropdownItem span {
+    font-size: 12px;
+    color: #e2e8f0;
+}
+
+.dropdownItem input[type="checkbox"] {
+    accent-color: #4299e1; 
+}
