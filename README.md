@@ -15,7 +15,7 @@ Full-stack application for managing and visualizing personal finances.
 
 ### Frontend
 1. cd frontend
-2. npm install
+2. npm install (Required only for the first setup)
 3. npm run dev
 
 ### Backend
